@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student Registration</title>
+</head>
+<?php
+include "config.php";
+if (isset($_POST["submit"])) {
+    $name = $_POST['sname'];
+    $fname = $_POST['fname'];
+    $m_f = $_POST['m_f'];
+    $a_f = $_POST['a_f'];
+    $doa = $_POST['doa'];
+    $w_no = $_POST['w_no'];
+    $s_data = "INSERT INTO `s_data`(`doa`, `name`, `f_name`, `w_no`, `a_fee`, `m_fee`) VALUES ('$doa','$name','$fname','$w_no','$a_f','$m_f'";
+    $result = mysqli_query($conn,$s_data);
+    if($result)
+    {
+        echo "geki";
+    }
+    else{
+        echo "failed";
+    }
+    $lastid = mysqli_insert_id($conn);
+    $_SESSION['lastid'] = $lastid;
+}
+?>
+
+<body>
+    <br><br>
+    <div class="container mt-5 mb-5" style="background-color:white;padding:1%">
+        <div>
+            <div style="text-align: center;margin-bottom:2%">
+                <h1> Student Registration</h1>
+            </div>
+            <hr>
+            <form class="needs-validation" method="POST" novalidate>
+                <div class="container" style="margin-left:10%">
+                    <div class="input-group " style="text-align: center">
+                        <div class="form-group" style="width:40%;">
+                            <label for="sname">Student Name</label>
+                            <input value="" type="text" class="form-control inp" id="sname" placeholder="Enter Student Name" autocomplete="off" name="sname" required>
+                            <div class="invalid-feedback">Student Name is Required.</div>
+                        </div>
+                        <div class="form-group inp" style="margin-left:20px;width:40%">
+                            <label for="fname">Father Name</label>
+                            <input value="" type="text" class="form-control inp" id="fname" placeholder="Enter Father Name" autocomplete="off" name="fname" required>
+                            <div class="invalid-feedback">Father Name is Required.</div>
+                        </div>
+                        <div class="form-group form-check">
+                        </div>
+                    </div>
+                    <div class="input-group " style="text-align: center">
+                        <div class="form-group" style="width:40%;">
+                            <label for="m_f">Student Monthly Fees</label>
+                            <input value="" type="number" class="form-control" id="m_f" placeholder="Enter Student Monthly Fee's" autocomplete="off" name="m_f" required>
+                            <div class="invalid-feedback">Student Contact is Required.</div>
+                        </div>
+                        <div class="form-group" style="margin-left:20px;width:40%">
+                            <label for="a_f">Student Admission Fees</label>
+                            <input value="" type="number" class="form-control" id="a_f" placeholder="Enter Student Admission Fee's" autocomplete="off" name="a_f" required>
+                            <div class="invalid-feedback">Student Admission Fee's is Required.</div>
+                        </div>
+                        <div class="form-group form-check">
+                        </div>?
+                    </div>
+                    <div class="input-group" style="text-align: center">
+                        <div class="form-group" style="width:82%;">
+                            <label for="doa">Date of Admission</label>
+                            <input class="form-control" value="" id="doa" name="doa" type="Date" required>
+                            <div class="invalid-feedback">Date of Admission is Required.</div>
+                        </div>
+                        <div class="form-group" style="width:82%;">
+                            <label for="w_no">Whatsapp Number</label>
+                            <input class="form-control" value="" id="w_no" name="w_no" type="number" required>
+                            <div class="invalid-feedback">Student Whatsapp Number is Required.</div>
+                        </div>
+
+                    </div>
+                    <center>
+                        <button type="submit" id="btn" name="submit" onclick="trim()" class="btn btn-outline-primary btn" style="width:60%;margin-right:19%">Register</button>
+                    </center>
+            </form>
+        </div>
+    </div>
+    <script>
+        function trim() {
+            document.getElementsByClassName("inp")[0].value.trim();
+            document.getElementsByClassName("inp")[2].value.trim();
+            document.getElementsByClassName("inp")[3].value.trim();
+        }
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</body>
+
+</html>
+<script>
+    $(document).ready(function() {
+        var a = $("#sname");
+        $("#btn").on("click", function() {
+            var name = $("#sname");
+            var fname = $("#fname");
+        });
+    });
+</script>
